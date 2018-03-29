@@ -14,6 +14,7 @@ const server = http.createServer(app);
 const io = socketIo(server);
 
 let interval;
+const deltaTime = 250;
 
 io.on("connection", socket => {
     console.log("New client connected");
@@ -22,7 +23,7 @@ io.on("connection", socket => {
     }
     interval = setInterval(
         () => getApiAndEmit(socket),
-        500
+        deltaTime
     );
     socket.on("disconnect", () => console.log("Client disconnected"));
 });
